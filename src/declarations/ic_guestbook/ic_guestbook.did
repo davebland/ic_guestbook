@@ -1,0 +1,7 @@
+service : {
+  addEntry: (text) -> (text);
+  getEntries: () -> (vec record {
+                           text;
+                           int;
+                         }) query;
+}
