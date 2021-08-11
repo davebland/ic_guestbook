@@ -21,24 +21,34 @@ export default {
   methods: {
     async addEntry(button) {
 
-      button.innerText = '...';
-      button.setAttribute('disabled', true);
+      const text = document.getElementById("textinput").value;
+      const validationFeedback = document.getElementById("validationfeedback");
+      validationFeedback.innerText = "";
 
-      const entryText = document.getElementById("newentry").value.toString();
-      console.log(await ic_guestbook.addEntry(entryText));
+      if ( text.length == 0) {
+        validationFeedback.innerText = "Please enter a message";
+      } else {
+        button.innerText = 'Sending ...';
+        button.setAttribute('disabled', true);
 
-      button.innerText = 'Add to Guest Book';
-      button.removeAttribute('disabled');
+        console.log(await ic_guestbook.addEntry(text.toString()));
 
-      this.getEntries();
+        button.innerText = 'Add to Guest Book';
+        button.removeAttribute('disabled');
+
+        this.getEntries();
+      }
     },
     async getEntries() {      
       this.entries = await ic_guestbook.getEntries();
-      console.log(this.entries);
+    },
+    async poll() {
+      setTimeout(() => {  this.getEntries(); this.poll(); }, 10000);
     }
   },
   mounted() {
     this.getEntries();
+    this.poll();
   }
 }
 </script>

@@ -6,6 +6,7 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Int))],
         ['query'],
       ),
+    'resetGuestBook' : IDL.Func([], [], []),
   });
 };
 export const init = ({ IDL }) => { return []; };

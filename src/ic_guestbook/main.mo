@@ -4,7 +4,7 @@ import Time = "mo:base/Time";
 
 actor {
 
-    var entries : [(Text, Int)] = [];
+    stable var entries : [(Text, Int)] = [];
 
     public func addEntry(newText : Text) : async Text {
         entries := Array.append(entries, [(newText, Time.now())]);

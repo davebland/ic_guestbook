@@ -4,4 +4,5 @@ service : {
                            text;
                            int;
                          }) query;
+  resetGuestBook: () -> ();
 }
