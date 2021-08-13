@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 let localCanisters, prodCanisters, canisters;
 
@@ -79,10 +80,12 @@ module.exports = {
         //  ]
         // },
         plugins: [
-            // new HtmlWebpackPlugin({
-            // template: path.join(__dirname, asset_entry),
-            // cache: false
-            // }),
+            new HtmlWebpackPlugin({
+              template: path.join(__dirname, asset_entry),
+              filename: 'htmlwebpack.html',
+              cache: false,
+              title: 'The IC Guestbook'
+            }),
             new CopyPlugin({
             patterns: [
                 {
@@ -92,8 +95,8 @@ module.exports = {
             ],
             }),
             new webpack.EnvironmentPlugin({
-            NODE_ENV: 'development',
-            IC_GUESTBOOK_CANISTER_ID: canisters["ic_guestbook"]
+              NODE_ENV: 'development',
+              IC_GUESTBOOK_CANISTER_ID: canisters["ic_guestbook"]
             }),
             new webpack.ProvidePlugin({
             Buffer: [require.resolve("buffer/"), "Buffer"],

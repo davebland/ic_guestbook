@@ -13,7 +13,7 @@
       },
       "source": [
         "src/ic_guestbook_assets/assets",
-        "dist/ic_guestbook_assets"
+        "dist"
       ],
       "type": "assets"
     }
