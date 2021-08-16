@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <GuestBookFrontPage :entries="this.entries" @addEntry="addEntry"/>
+    <GuestBookFrontPage :entries="this.entries" :visitorCount="this.visitorCount" @addEntry="addEntry"/>
   </section>
 </template>
 
@@ -15,7 +15,8 @@ export default {
   },
   data() {
     return {
-      entries: []
+      entries: [],
+      visitorCount: 0
     }
   },
   methods: {
@@ -42,12 +43,18 @@ export default {
     async getEntries() {      
       this.entries = await ic_guestbook.getEntries();
     },
+    async getVisitorCount() {
+      this.visitorCount = await ic_guestbook.getVisitorCount();
+    },
     async poll() {
-      setTimeout(() => {  this.getEntries(); this.poll(); }, 10000);
+      // Refresh data every 1 minute
+      setTimeout(() => {  this.getEntries(); this.getVisitorCount(); this.poll(); }, 60000);
     }
   },
   mounted() {
     this.getEntries();
+    this.getVisitorCount();
+    ic_guestbook.addVisit();
     this.poll();
   }
 }

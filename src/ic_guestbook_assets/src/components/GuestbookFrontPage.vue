@@ -1,7 +1,8 @@
 <template>
   <div class="box">
+    <p id="visitor-counter-display">Guests: {{visitorCount}}</p>
     <img src="../../assets/humboldt_icon.png">
-    <h1>Internet Computer Guest Book</h1>
+    <h1>The Internet Computer Guest Book</h1>
     <div class="xpad">
       <input id="textinput" type="text" name="entry" placeholder="your message..." maxlength="50">
       <p id="validationfeedback"></p>
@@ -23,7 +24,7 @@
 <script>
 export default {
   name: 'GuestBookFrontPage',
-  props: ['entries'],
+  props: ['entries','visitorCount'],
   methods: {
     formatDateFromInt(secondsInt) {      
       let date = new Date(Number(secondsInt)/1000000);      
@@ -92,5 +93,12 @@ img {
   position: absolute;
   top: 8px;
   right: 10px;
+}
+
+#visitor-counter-display {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color: grey;
 }
 </style>

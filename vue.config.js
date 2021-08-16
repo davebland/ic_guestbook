@@ -40,6 +40,12 @@ const asset_entry = path.join(
 );
 
 module.exports = {
+    // delete HTML related webpack plugins
+    chainWebpack: config => {
+      config.plugins.delete('html')
+      config.plugins.delete('preload')
+      config.plugins.delete('prefetch')
+    },
     configureWebpack: {
         target: "web",
         mode: isDevelopment ? "development" : "production",
@@ -81,8 +87,7 @@ module.exports = {
         // },
         plugins: [
             new HtmlWebpackPlugin({
-              template: path.join(__dirname, asset_entry),
-              filename: 'htmlwebpack.html',
+              template: path.join(__dirname, asset_entry),              
               cache: false,
               title: 'The IC Guestbook'
             }),

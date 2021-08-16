@@ -1,8 +1,10 @@
 service : {
   addEntry: (text) -> (text);
+  addVisit: () -> ();
   getEntries: () -> (vec record {
                            text;
                            int;
                          }) query;
+  getVisitorCount: () -> (nat) query;
   resetGuestBook: () -> ();
 }
